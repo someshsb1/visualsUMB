@@ -1,0 +1,565 @@
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
+
+  <style>
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-30px);
+      }
+
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+
+    #annotation1 {
+      position: absolute;
+      margin-left: 130px;
+      margin-top: -500px;
+      animation: bounce 2s infinite;
+    }
+
+    #annotation3 {
+      position: absolute;
+      margin-left: 130px;
+      margin-top: -500px;
+      animation: bounce 2s infinite;
+    }
+
+    #annotation4 {
+      position: absolute;
+      margin-left: 130px;
+      margin-top: -500px;
+      animation: bounce 2s infinite;
+    }
+
+    .main {
+      height: 70%;
+      width: 99%;
+    }
+
+    body {
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+
+    .superlarge {
+      font-size: 72px;
+      font-family: impact;
+    }
+
+    .larger {
+      font-family: impact;
+      font-size: 36px;
+    }
+
+    .slide-in {
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    }
+
+    .sponge-bob {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce-spongebob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .sponge-bob {
+      animation: bounce-spongebob 1.5s infinite ease-in-out;
+    }
+
+    .panel {
+      padding-top: 400px;
+      padding-left: 100px;
+      height: 100%;
+      width: 100%;
+      background-color: rgb(249, 249, 249);
+      opacity: 0;
+    }
+
+    .small {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .review-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 28px;
+      color: white;
+      background-color: #0073e6;
+      text-decoration: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .review-button:hover {
+      background-color: #003772;
+    }
+  </style>
+
+</head>
+
+<body>
+  <audio id="panel1Sound" src="1.mp3"></audio>
+  <audio id="chart1View" src="1.1.mp3"></audio>
+  <audio id="chart2View" src="2.mp3"></audio>
+  <audio id="chart3View" src="3.mp3"></audio>
+  <audio id="chart4View" src="4.mp3"></audio>
+  <audio id="endSound" src="5.mp3"></audio>
+  <audio id="endSound2" src="6.mp3"></audio>
+
+
+  <div id="panel1" class='panel' style='padding-top: 0px;'>
+    <div id='text0' class="superlarge slide-in">
+
+      <img class='main' src='1.jpg' width=600 onclick="playImg1Sound()"><br>
+      UMass Boston <br>Visualizing Departments & Professors Ratings!
+    </div>
+    <div id="text01" class="small slide-in">(click/scroll the images & charts for earcandy)</div>
+
+  </div>
+
+  <div id="panel2" class='panel' style='padding-top:300px'>
+    <div id='text1' class='larger slide-in'>
+
+      Top 10 Departments ( > Professor Review Count)
+
+    </div>
+
+    <div id='chart1'></div>
+
+    <div id='annotation1' class='larger slide-in' style='position: absolute; margin-left: 130px; margin-top: -500px;'>
+      English 😲
+    </div>
+  </div>
+
+  <div id="panel3" class='panel' style='height:600px'>
+
+    <div id='text2' class="larger slide-in">Top 10 Professors (Rating=5.0 and > Review Count)</div>
+
+    <div id='chart2'></div>
+
+    <div id='annotation2' class='larger slide-in' style='position: absolute; margin-left: 910px; margin-top: -480px;'>
+      <img class="sponge-bob" src='spongebob.png' style='width:50px;vertical-align: middle;'>None of them are from CS
+      <br>
+      <marquee> (Stop looking for Prof. Daniel Haehn)</marquee>
+    </div>
+
+  </div>
+
+  <div id="panel4" class='panel' style='height:900px'>
+
+    <div id='text3' class='larger slide-in'>Lets Look at the Top MoneyMaker Professors of UMass Boston<br>Regardless of
+      their
+      rating!</div>
+
+    <div id='chart3'></div>
+
+    <div id='annotation3' class='larger slide-in' style='position: absolute; margin-left: 150px; margin-top: -430px;'>
+      <img src="dansim.gif" style="width: 50px;vertical-align: middle; border-radius: 50%;"><br>Dad?
+    </div>
+    <div id='annotation5' class='small slide-in' style='position: absolute; margin-left: 10px; margin-top: -15px;'>
+      Rating doesn't
+      seems so relevant now does it? <br>A 3.4 makes more money than a 3.8, makes more than a 4.9<br>Also Computer
+      Science did make it to the chart now, that's gotta be a good thing right? (money-wise)</div>
+
+
+  </div>
+
+  <div id="panel5" class='panel' style='height:1200px'>
+
+    <div id='text4' class='superlarge slide-in'>Where is our Prof. Daniel Haehn in all this?</div>
+    <div id='text5' class="small slide-in">In the top 40s (All Rated = 5.0) <br>Why top 40, you ask? Less number of
+      reviews
+      (makes decent money though. 😉)
+    </div>
+
+    <div id='chart4'></div>
+
+    <div id='annotation4' class='larger slide-in' style='position: absolute; margin-left: 760px; margin-top: -420px;'>
+      <img src="haehn.png" style="width: 50px;vertical-align: middle; border-radius: 50%;"><br>
+    </div>
+  </div>
+
+  <div id="panel6" class='panel' style='height:1500px'>
+    <div id='text6' class='superlarge slide-in'>How do we get him <br>In the top 10 Best Rated Professors of UMass
+      Boston?</div>
+    <div id='text7' class="small slide-in">More Review Counts on RateMyProfessors (it better be a 5.0 😠 😠 😠)</div>
+    <a href="https://www.ratemyprofessors.com/professor/2530441" target="_blank" class="review-button">Rate him Now!</a>
+  </div>
+
+  <div id="panel7" class='panel' style='height:1500px'>
+    <div id='text8' class='superlarge slide-in'>Thank you for watching and listening!!</div>
+    <div id='text8' class='small slide-in'>Credits: Inspired with the template created by Prof. Daniel.</div>
+
+  </div>
+
+  </div>
+
+
+  <script>
+
+    function playImg1Sound() {
+      var audio = new Audio('1.mp3');
+      audio.play();
+    }
+
+    const chart3View = document.querySelector('#chart3');
+    chart3View.addEventListener('click', (event, item) => {
+      const chart3View = document.querySelector('#chart3View');
+      chart3View.play();
+    });
+
+    const chart4View = document.querySelector('#chart4');
+    chart4View.addEventListener('click', (event, item) => {
+      const chart4View = document.querySelector('#chart4View');
+      chart4View.play();
+    });
+
+
+    departments = ['English', 'Biology', 'Psychology', 'Mathematics', 'Sociology', 'Management', 'Performing Arts', 'History', 'Accounting & Finance', 'Nursing'];
+
+    professors = ['John Hess', 'Patrick Clarkin', 'Paul Dyson', 'Marc Cohen', 'Itai Halevi', 'Kevin Carlson', 'Erik Blaser', 'Avak Hasratian', 'Daniel Messier', 'Lauren Sullivan']
+
+    chart1 = {
+      "width": 800,
+      "height": 400,
+      "data": {
+        "values": [
+          { "department": "English", "total_rating": 299.7 },
+          { "department": "Biology", "total_rating": 158.3 },
+          { "department": "Psychology", "total_rating": 145.2 },
+          { "department": "Mathematics", "total_rating": 126.1 },
+          { "department": "Sociology", "total_rating": 122.3 },
+          { "department": "Management", "total_rating": 117.5 },
+          { "department": "Performing Arts", "total_rating": 103.8 },
+          { "department": "History", "total_rating": 91.4 },
+          { "department": "Accounting & Finance", "total_rating": 90.9 },
+          { "department": "Nursing", "total_rating": 86.4 }
+        ]
+      },
+      "mark": "bar",
+      "encoding": {
+        "x": { "field": "department", "type": "ordinal", "sort": null, "title": "Department" },
+        "y": { "field": "total_rating", "type": "quantitative", "title": "Total Rating" },
+        "tooltip": [
+          { "field": "department", "type": "nominal", "title": "Department" },
+          { "field": "total_rating", "type": "quantitative", "title": "Total Rating" }
+        ],
+        "color": { "field": "total_rating", "type": "quantitative", "scale": { "scheme": "viridis" }, "title": "Rating Spectrum" }
+      },
+      "config": {
+        "view": { "stroke": "transparent" },
+        "axis": { "grid": false }
+      }
+    };
+
+
+    chart2 = {
+      "width": 800,
+      "height": 400,
+      "data": {
+
+        "values": [{ 'professor': 'John Hess', 'total_rating': 109 },
+        { 'professor': 'Patrick Clarkin', 'total_rating': 99 },
+        { 'professor': 'Paul Dyson', 'total_rating': 97 },
+        { 'professor': 'Marc Cohen', 'total_rating': 95 },
+        { 'professor': 'Itai Halevi', 'total_rating': 85 },
+        { 'professor': 'Kevin Carlson', 'total_rating': 80 },
+        { 'professor': 'Erik Blaser', 'total_rating': 80 },
+        { 'professor': 'Avak Hasratian', 'total_rating': 75 },
+        { 'professor': 'Daniel Messier', 'total_rating': 74 },
+        { 'professor': 'Lauren Sullivan', 'total_rating': 73 }]
+
+      },
+
+      "mark": "bar",
+
+      "encoding": {
+
+        "x": {
+          "field": "professor",
+          "type": "ordinal",
+          "sort": null,
+          "title": "Professors"
+        },
+        "y": { "field": "total_rating", "type": "quantitative", "title": "Total Rating" },
+        "tooltip": [
+          { "field": "professor", "type": "ordinal" },
+          { "field": "total_rating", "type": "quantitative", "title": "Total Rating" }
+        ],
+        "color": { "field": "total_rating", "type": "quantitative", "scale": { "scheme": "viridis" }, "title": "Rating Spectrum" }
+      }
+    }
+
+
+    chart3 = {
+      "width": 800,
+      "height": 400,
+      "data": {
+        "values": [
+          { "NAME": "Jacqueline Fawcett", "RATING": -1.0, "ANNUAL_RATE": 223018.801 },
+          { "NAME": "Maureen Scully", "RATING": 4.8, "ANNUAL_RATE": 226304.209 },
+          { "NAME": "Atreya Chakraborty ", "RATING": 4.2, "ANNUAL_RATE": 226805.378 },
+          { "NAME": "Rajini Srikanth  ", "RATING": 4.9, "ANNUAL_RATE": 230685.880 },
+          { "NAME": "Zong-Guo Xia", "RATING": 3.6, "ANNUAL_RATE": 231949.201 },
+          { "NAME": "Jill Macoska", "RATING": 4.3, "ANNUAL_RATE": 233688.923 },
+          { "NAME": "Dan Simovici", "RATING": 3.8, "ANNUAL_RATE": 240359.164 },
+          { "NAME": "Joseph Cooper", "RATING": 4.8, "ANNUAL_RATE": 241477.929 },
+          { "NAME": "Tyson King-Meadows", "RATING": 3.4, "ANNUAL_RATE": 255000.143 },
+          { "NAME": "James Motley", "RATING": 5.0, "ANNUAL_RATE": 288006.622 }
+        ]
+      },
+      "encoding": {
+        "x": { "field": "NAME", "type": "nominal", "axis": { "labelAngle": -45 } },
+        "y": { "axis": { "title": "Annual Rate" } },
+        "tooltip": [
+          { "field": "NAME", "type": "ordinal" },
+          { "field": "ANNUAL_RATE", "type": "quantitative", "title": "ANNUAL_RATE" },
+          { "field": "RATING", "type": "quantitative", "title": "RATING" }
+        ],
+      },
+      "layer": [
+        {
+          "mark": { "type": "circle", "color": "#1f77b4", "size": 200 },
+          "encoding": {
+            "y": { "field": "ANNUAL_RATE", "type": "quantitative" }
+          }
+        }
+      ]
+    }
+
+    chart4 = {
+      "width": 800,
+      "height": 400,
+      "data": {
+        "values": [{ "FULL_NAME": "John Hess", "ANNUAL_RATE": 94832.738, "RATING": 5.0 }, { "FULL_NAME": "Patrick Clarkin", "ANNUAL_RATE": 108220.413, "RATING": 5.0 }, { "FULL_NAME": "Paul Dyson", "ANNUAL_RATE": 89881.993, "RATING": 5.0 }, { "FULL_NAME": "Marc Cohen", "ANNUAL_RATE": 209904.419, "RATING": 5.0 }, { "FULL_NAME": "Itai Halevi", "ANNUAL_RATE": 83902.007, "RATING": 5.0 }, { "FULL_NAME": "Kevin Carlson", "ANNUAL_RATE": 76728.142, "RATING": 5.0 }, { "FULL_NAME": "Erik Blaser", "ANNUAL_RATE": 149371.682, "RATING": 5.0 }, { "FULL_NAME": "Avak Hasratian", "ANNUAL_RATE": 82301.284, "RATING": 5.0 }, { "FULL_NAME": "Daniel Messier", "ANNUAL_RATE": 76595.5, "RATING": 5.0 }, { "FULL_NAME": "Lauren Sullivan", "ANNUAL_RATE": 97178.594, "RATING": 5.0 }, { "FULL_NAME": "Caroline Coscia", "ANNUAL_RATE": 76872.402, "RATING": 5.0 }, { "FULL_NAME": "Scott Myers", "ANNUAL_RATE": 10700.001, "RATING": 5.0 }, { "FULL_NAME": "Ian Drinkwater", "ANNUAL_RATE": 68434.476, "RATING": 5.0 }, { "FULL_NAME": "Allison Smith", "ANNUAL_RATE": 86052.096, "RATING": 5.0 }, { "FULL_NAME": "David Pruett", "ANNUAL_RATE": 115293.196, "RATING": 5.0 }, { "FULL_NAME": "Brian Meredith", "ANNUAL_RATE": 75238.705, "RATING": 5.0 }, { "FULL_NAME": "Gerard Horgan", "ANNUAL_RATE": 55846.405, "RATING": 5.0 }, { "FULL_NAME": "David Sigmon", "ANNUAL_RATE": 119633.679, "RATING": 5.0 }, { "FULL_NAME": "Bryan Richardson", "ANNUAL_RATE": 56959.625, "RATING": 5.0 }, { "FULL_NAME": "Christopher Craig", "ANNUAL_RATE": 75116.558, "RATING": 5.0 }, { "FULL_NAME": "Paul DeFazio", "ANNUAL_RATE": 22000.0, "RATING": 5.0 }, { "FULL_NAME": "Gregory Newton", "ANNUAL_RATE": 11000.0, "RATING": 5.0 }, { "FULL_NAME": "Stephanie Wood LaFond", "ANNUAL_RATE": 64665.058, "RATING": 5.0 }, { "FULL_NAME": "Gerald Walsh", "ANNUAL_RATE": 36156.12, "RATING": 5.0 }, { "FULL_NAME": "Margaret Vaughan", "ANNUAL_RATE": 64059.216, "RATING": 5.0 }, { "FULL_NAME": "Karla Schallies", "ANNUAL_RATE": 73822.575, "RATING": 5.0 }, { "FULL_NAME": "Kate Martin", "ANNUAL_RATE": 11000.0, "RATING": 5.0 }, { "FULL_NAME": "Ellen Frank", "ANNUAL_RATE": 124650.47, "RATING": 5.0 }, { "FULL_NAME": "Scott Maisano", "ANNUAL_RATE": 119422.841, "RATING": 5.0 }, { "FULL_NAME": "John Bozeman", "ANNUAL_RATE": 10700.001, "RATING": 5.0 }, { "FULL_NAME": "Elizabeth Sweet", "ANNUAL_RATE": 115913.712, "RATING": 5.0 }, { "FULL_NAME": "Meredith Reiches", "ANNUAL_RATE": 102147.861, "RATING": 5.0 }, { "FULL_NAME": "Dora Alvarez", "ANNUAL_RATE": 76479.77, "RATING": 5.0 }, { "FULL_NAME": "Marc Lavine", "ANNUAL_RATE": 161595.861, "RATING": 5.0 }, { "FULL_NAME": "Michael Fennimore", "ANNUAL_RATE": 62678.085, "RATING": 5.0 }, { "FULL_NAME": "Abdelkrim Mouhib", "ANNUAL_RATE": 39889.823, "RATING": 5.0 }, { "FULL_NAME": "Olga Katkova", "ANNUAL_RATE": 55119.958, "RATING": 5.0 }, { "FULL_NAME": "Brittany Peterson", "ANNUAL_RATE": 75872.956, "RATING": 5.0 }, { "FULL_NAME": "Daniel Haehn", "ANNUAL_RATE": 119956.622, "RATING": 5.0 }, { "FULL_NAME": "Jeremy Wanderer", "ANNUAL_RATE": 111410.437, "RATING": 5.0 }]
+      },
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "FULL_NAME",
+          "type": "ordinal",
+          "sort": {
+            "field": "ANNUAL_RATE",
+            "order": "ascending"
+          },
+          "axis": {
+            "title": "Full Name",
+            "titleFontSize": 16,
+            "labelFontSize": 10,
+            "labelAngle": -45
+          }
+        },
+        "y": {
+          "field": "ANNUAL_RATE",
+          "type": "quantitative",
+          "axis": {
+            "title": "Annual Rate",
+            "titleFontSize": 16,
+            "labelFontSize": 12
+          }
+        },
+        "tooltip": [
+          { "field": "FULL_NAME", "type": "nominal", "title": "Name" },
+          { "field": "ANNUAL_RATE", "type": "quantitative", "title": "Annual Rate", "format": ",.2f" },
+          { "field": "RATING" },
+        ],
+        "color": {
+          "condition": {
+            "test": "datum.FULL_NAME == 'Daniel Haehn'",
+            "value": "#1f77b4"  // Color for Daniel Haehn's bar
+          },
+          "value": "#F6AB56" // Default color for all other bars
+        }
+      }
+    }
+
+
+
+    vegaEmbed("#chart1", chart1, { actions: false, renderer: 'svg' });
+
+    vegaEmbed("#chart2", chart2, { actions: false, renderer: 'svg' });
+
+    vegaEmbed("#chart3", chart3, { actions: false, renderer: 'svg' });
+
+    vegaEmbed("#chart4", chart4, { actions: false, renderer: 'svg' });
+
+
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: "#chart2",
+      start: "top center",
+      onEnter: () => {
+        const backgroundMusic = document.getElementById('chart2View');
+        backgroundMusic.play();
+      },
+      onLeaveBack: () => {
+        const backgroundMusic = document.getElementById('chart2View');
+        backgroundMusic.pause();
+      },
+      markers: false,
+    });
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: "#chart1",
+      start: "top center",
+      onEnter: () => {
+        const backgroundMusic = document.getElementById('chart1View');
+        backgroundMusic.play();
+      },
+      onLeaveBack: () => {
+        const backgroundMusic = document.getElementById('chart1View');
+        backgroundMusic.pause();
+      },
+      markers: false,
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: "#panel1",
+      start: "top center",
+      onEnter: () => {
+        const backgroundMusic = document.getElementById('panel1Sound');
+        backgroundMusic.play();
+      },
+      onLeaveBack: () => {
+        const backgroundMusic = document.getElementById('panel1Sound');
+        backgroundMusic.pause();
+      },
+      markers: false,
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: "#panel6",
+      start: "top center",
+      onEnter: () => {
+        const backgroundMusic = document.getElementById('endSound');
+        backgroundMusic.play();
+      },
+      onLeaveBack: () => {
+        const backgroundMusic = document.getElementById('endSound');
+        backgroundMusic.pause();
+      },
+      markers: false,
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: "#panel7",
+      start: "top center",
+      onEnter: () => {
+        const backgroundMusic = document.getElementById('endSound2');
+        backgroundMusic.play();
+      },
+      onLeaveBack: () => {
+        const backgroundMusic = document.getElementById('endSound2');
+        backgroundMusic.pause();
+      },
+      markers: false,
+    });
+
+    gsap.set("#panel1", { opacity: 1 });
+
+    gsap.utils.toArray(".panel").forEach((panel, i, panels) => {
+      ScrollTrigger.create({
+        trigger: panel,
+        start: "top top",
+        end: "+=50%",
+        onEnter: function () {
+
+          gsap.to(panel, { opacity: 1, duration: 1 });
+
+          // PPP = panel
+          paths = panel.querySelectorAll('svg .role-mark path');
+
+          console.log(paths)
+
+          for (var i = 0; i < paths.length; i++) {
+
+            p = paths[i];
+
+            clonedP = p.cloneNode();
+            parentE = p.parentElement;
+
+            parentE.removeChild(p);
+            parentE.appendChild(clonedP);
+
+          }
+
+        },
+        onLeaveBack: () => gsap.to(panel, { opacity: 0, duration: 1 }),
+        markers: false,
+      });
+    });
+
+    gsap.utils.toArray(".panel").forEach((panel) => {
+      // Getting all slide-in elements within the panel
+      const sliders = panel.querySelectorAll('.slide-in');
+
+      sliders.forEach(slider => {
+        gsap.fromTo(slider,
+          { x: -300, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: slider,
+              start: "top 90%", // Trigger when the top of the element hits the 90% viewport height
+              toggleActions: "play none none none",
+              markers: false
+            }
+          });
+      });
+    });
+
+
+    // Scroll back to top
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: "bottom bottom",
+      once: false,
+      onEnter: () => {
+        gsap.to(window, { duration: 2, scrollTo: { y: 10 } });
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>
